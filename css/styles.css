@@ -23,3 +23,20 @@ header h2,
 header p {
   margin: 0 30px;
 }
+
+main {
+  border: 1px solid red;
+  width: 100%;
+  height: calc(100vh - 70px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  border: 1px solid red;
+  width: 90%;
+  max-width: 350px;
+  height: 90vw;
+  max-height: 350px;
+}

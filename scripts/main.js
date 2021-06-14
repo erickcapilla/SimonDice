@@ -4,41 +4,73 @@ const score = document.getElementById('score')
 const level = document.getElementById('level')
 const btn_colors = document.querySelectorAll('#btn_colors')
 
+const colorsBnt = []
+colorsBnt['blue'] = btn_colors[0]
+colorsBnt['red'] = btn_colors[1]
+colorsBnt['green'] = btn_colors[2]
+colorsBnt['yellow'] = btn_colors[3]
+
+const colors = {
+  FIRST: "blue",
+  SECOND: "red",
+  THIRD: "green",
+  FOURTH: "yellow"
+}
+
+const colorsSave = []
+let levels = 1
+let scores = 0
+
 btn_start.addEventListener('click', () => {
   if(!container.classList.contains('hide'))
     container.classList.add('hide')
-
   start()
 })
 
 const start = () => {
-  setInterval(() => {
-    setTimeout (() => {
-      btn_colors[0].classList.add('light-blue')
+
+  if(levels <= 10) {
+    game()
+    console.log(levels);
+    levels++
+    start()
+  } else {
+    console.log('Game Over');
+  }
+
+}
+
+const game = () => {
+  let colorRandom = Math.floor(Math.random() * 4) + 1
+
+  switch (colorRandom) {
+    case 1:
+      colorsSave.push(colors.FIRST)
+      break;
+    case 2:
+      colorsSave.push(colors.SECOND)
+      break;
+    case 3:
+      colorsSave.push(colors.THIRD)
+      break;
+    case 4:
+      colorsSave.push(colors.FOURTH)
+      break;
+  }
+
+  setTimeout(() => {
+    light()
+  }, 1000 * levels);
+}
+
+const light = () => {
+  colorsSave.map(element => {
+    setTimeout(() => {
+      colorsBnt[element].classList.add(`light-${element}`)
+      console.log(scores++);
       setTimeout(() => {
-        btn_colors[0].classList.remove('light-blue')
-      }, 500)
-    }, 1000)
-  
-    setTimeout (() => {
-      btn_colors[1].classList.add('light-red')
-      setTimeout(() => {
-        btn_colors[1].classList.remove('light-red')
-      }, 500)
-    }, 2500)
-  
-    setTimeout (() => {
-      btn_colors[2].classList.add('light-green')
-      setTimeout(() => {
-        btn_colors[2].classList.remove('light-green')
-      }, 500)
-    }, 3500)
-  
-    setTimeout (() => {
-      btn_colors[3].classList.add('light-yellow')
-      setTimeout(() => {
-        btn_colors[3].classList.remove('light-yellow')
-      }, 500)
-    }, 4500)
-  }, 5000);
+        colorsBnt[element].classList.remove(`light-${element}`)
+      }, 500);
+    }, 3000)
+  })
 }

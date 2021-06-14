@@ -10,22 +10,24 @@
   <body>
     <header>
       <h2>Simon Dice</h2>
-      <p class="score"><strong>Score:</strong> 0</p>
+      <p class="score" id="score"><strong>Score:</strong> 0</p>
     </header>
     <main>
       <div class="container">
         <div class="board">
-          <div class="blue"></div>
-          <div class="red"></div>
-          <div class="green"></div>
-          <div class="yellow"></div>
+          <div class="blue" id="btn_colors"></div>
+          <div class="red" id="btn_colors"></div>
+          <div class="green" id="btn_colors"></div>
+          <div class="yellow" id="btn_colors"></div>
           <div class="circle"></div>
-          <div class="btn-container">
+          <div class="btn-container" id="container">
             <button id="btn_start" class="btn-start">Start</button>
           </div>
         </div>
-        <p class="level"><strong>Level</strong>: 1</p>
+        <p class="level" id="level"><strong>Level</strong>: 0</p>
       </div>
     </main>
+
+    <script src="./scripts/main.js"></script>
   </body>
 </html>

@@ -11,13 +11,15 @@ colorsBnt['green'] = btn_colors[2]
 colorsBnt['yellow'] = btn_colors[3]
 
 const colors = {
-  FIRST: "blue",
-  SECOND: "red",
-  THIRD: "green",
-  FOURTH: "yellow"
+  FIRST: btn_colors[0],
+  SECOND: btn_colors[1],
+  THIRD: btn_colors[2],
+  FOURTH: btn_colors[3]
 }
 
-const colorsSave = []
+const colorsSaved = []
+let trueOrFalse = []
+let colorsClicked = []
 let levels = 1
 let scores = 0
 
@@ -28,12 +30,9 @@ btn_start.addEventListener('click', () => {
 })
 
 const start = () => {
-
   if(levels <= 10) {
+    level.innerHTML = levels
     game()
-    console.log(levels);
-    levels++
-    start()
   } else {
     console.log('Game Over');
   }
@@ -45,32 +44,78 @@ const game = () => {
 
   switch (colorRandom) {
     case 1:
-      colorsSave.push(colors.FIRST)
+      colorsSaved.push(colors.FIRST)
       break;
     case 2:
-      colorsSave.push(colors.SECOND)
+      colorsSaved.push(colors.SECOND)
       break;
     case 3:
-      colorsSave.push(colors.THIRD)
+      colorsSaved.push(colors.THIRD)
       break;
     case 4:
-      colorsSave.push(colors.FOURTH)
+      colorsSaved.push(colors.FOURTH)
       break;
   }
 
-  setTimeout(() => {
-    light()
-  }, 1000 * levels);
+  for(let i = 0; i < levels; i++) {
+    setTimeout(() => {
+      colorsSaved[i].classList.add(`light-${colorsSaved[i].classList[0]}`)
+      setTimeout(() => {
+        colorsSaved[i].classList.remove(`light-${colorsSaved[i].classList[0]}`)
+      }, 500)
+    }, 1000 * (i + 1))
+  }
+
+  colorsClicked = []
+
+  btn_colors.forEach(btn => {
+    btn.addEventListener('click', chooseColor)
+  })
+
 }
 
-const light = () => {
-  colorsSave.map(element => {
-    setTimeout(() => {
-      colorsBnt[element].classList.add(`light-${element}`)
-      console.log(scores++);
-      setTimeout(() => {
-        colorsBnt[element].classList.remove(`light-${element}`)
-      }, 500);
-    }, 3000)
-  })
+const chooseColor = (e) => {
+  colorsClicked.push(e.target)
+  
+  if(colorsClicked.length === colorsSaved.length) {
+    compare()
+  }
 }
+
+const compare = () => {
+  let incorrect = 0
+
+  for (let i = 0; i < colorsSaved.length; i++) {
+    colorsSaved[i] === colorsClicked[i]
+    ? trueOrFalse[i] = true : trueOrFalse[i] = false
+  }
+
+  for (let j = 0; j < trueOrFalse.length; j++) {
+    if(trueOrFalse[j] !== true)
+      incorrect++
+  }
+
+  console.log(trueOrFalse);
+
+  if (incorrect != 0) {
+    console.log('Game Over');
+  } else {
+    levels++
+    start()
+  }
+
+    // if(colorsSaved[i] === colorsClicked[i]) {
+    //   console.log('correcto')
+    //   if (colorsSaved.length === (i + 1)) {
+    //     // btn_colors.forEach(btn => {
+    //       //   btn.removeEventListener('click', chooseColor)
+    //       // })
+    //       levels++
+    //   }
+    //     start()
+    // } else {
+    //   console.log('incorrecto')
+    //   debugger
+    // }
+}
+

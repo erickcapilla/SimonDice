@@ -161,3 +161,41 @@ main {
   color: #1eff00;
   font-weight: bold;
 }
+
+.answer {
+  border: 2px solid white;
+  border-radius: 15px;
+  width: 80%;
+  padding: 15px;
+  margin: 25px auto;
+  text-align: center;
+}
+
+.answer-colors {
+  width: 100%;
+  margin: 10px auto 0;
+}
+
+.answer-colors .answer-color {
+  border: 1px solid white;
+  width: 85%;
+  border-radius: 5px;
+  margin: 0 auto 10px;
+  height: 35px;
+}
+
+.answer-colors .blue {
+  background-color: #0059ff;
+}
+
+.answer-colors .red {
+  background-color: #ff0000;
+}
+
+.answer-colors .green {
+  background-color: #1eff00;
+}
+
+.answer-colors .yellow {
+  background-color: #fff200;
+}

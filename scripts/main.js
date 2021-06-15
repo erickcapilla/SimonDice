@@ -3,6 +3,8 @@ const btn_start = document.getElementById('btn_start')
 const score = document.getElementById('score')
 const level = document.getElementById('level')
 const btn_colors = document.querySelectorAll('#btn_colors')
+const answers_card = document.getElementById('answers-card')
+const answers = document.getElementById('answer')
 
 const colorsBnt = []
 colorsBnt['blue'] = btn_colors[0]
@@ -17,7 +19,7 @@ const colors = {
   FOURTH: btn_colors[3]
 }
 
-const colorsSaved = []
+let colorsSaved = []
 let trueOrFalse = []
 let colorsClicked = []
 let levels = 1
@@ -26,6 +28,8 @@ let scores = 0
 btn_start.addEventListener('click', () => {
   if(!container.classList.contains('hide'))
     container.classList.add('hide')
+  if (answers_card.classList.add('hide'))
+    answers_card.classList.add('hide')
   start()
 })
 
@@ -35,6 +39,12 @@ const start = () => {
     game()
   } else {
     console.log('Game Over');
+    Swal.fire(
+      'You have passed all levels',
+      `Score: ${scores}`,
+      'success'
+    )
+    restart()
   }
 
 }
@@ -70,8 +80,8 @@ const game = () => {
 
   btn_colors.forEach(btn => {
     btn.addEventListener('click', chooseColor)
+    console.log(btn);
   })
-
 }
 
 const chooseColor = (e) => {
@@ -86,8 +96,14 @@ const compare = () => {
   let incorrect = 0
 
   for (let i = 0; i < colorsSaved.length; i++) {
-    colorsSaved[i] === colorsClicked[i]
-    ? trueOrFalse[i] = true : trueOrFalse[i] = false
+    if (colorsSaved[i] === colorsClicked[i]) {
+      trueOrFalse[i] = true
+      scores += 15 * levels
+      score.innerHTML = scores
+    } else {
+      trueOrFalse[i] = false
+
+    }
   }
 
   for (let j = 0; j < trueOrFalse.length; j++) {
@@ -99,23 +115,35 @@ const compare = () => {
 
   if (incorrect != 0) {
     console.log('Game Over');
+    answersFunc()
+    Swal.fire(
+      'Game Over',
+      `Score: ${scores}
+      Level: ${levels}`,
+      'error'
+    )
+    restart()
   } else {
     levels++
     start()
   }
-
-    // if(colorsSaved[i] === colorsClicked[i]) {
-    //   console.log('correcto')
-    //   if (colorsSaved.length === (i + 1)) {
-    //     // btn_colors.forEach(btn => {
-    //       //   btn.removeEventListener('click', chooseColor)
-    //       // })
-    //       levels++
-    //   }
-    //     start()
-    // } else {
-    //   console.log('incorrecto')
-    //   debugger
-    // }
 }
 
+const restart = () => {
+  colorsSaved = []
+  trueOrFalse = []
+  colorsClicked = []
+  levels = 1
+  scores = 0
+  score.innerHTML = 0
+  level.innerHTML = 0
+  container.classList.remove('hide')
+}
+
+const answersFunc = () => {
+  answers.innerHTML = ''
+  colorsSaved.forEach(color => {
+    answers.innerHTML += `<div class="answer-color ${color.classList[0]}"></div>`
+  })
+  answers_card.classList.remove('hide')
+}

@@ -43,6 +43,7 @@ main {
   height: 90vw;
   max-height: 350px;
   margin-top: 20px;
+  transition: 5s;
 }
 
 .container .board {
@@ -169,6 +170,7 @@ main {
   padding: 15px;
   margin: 25px auto;
   text-align: center;
+  transition: 3s;
 }
 
 .answer-colors {

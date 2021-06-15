@@ -43,7 +43,6 @@ main {
   height: 90vw;
   max-height: 350px;
   margin-top: 20px;
-  transition: 5s;
 }
 
 .container .board {
@@ -171,7 +170,7 @@ main {
   padding: 15px;
   margin: 25px auto;
   text-align: center;
-  transition: 3s;
+  transition: 5s;
 }
 
 .answer-colors {
@@ -201,4 +200,84 @@ main {
 
 .answer-colors .yellow {
   background-color: #fff200;
+}
+
+.difficulty {
+  width: 120px;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: space-around;
+  position: fixed;
+  top: 0;
+  right: 15px;
+  padding-top: 70px;
+}
+
+.difficulty article {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.difficulty .easy {
+  border: 2px solid #66ff00;
+}
+
+.difficulty .normal {
+  border: 2px solid #d0ff00;
+}
+
+.difficulty .hard {
+  border: 2px solid #e40303;
+}
+
+.difficulty .easy:hover {
+  background-color: #66ff00;
+  font-weight: bold;
+}
+
+.difficulty .normal:hover {
+  background-color: #d0ff00;
+  font-weight: bold;
+}
+
+.difficulty .hard:hover {
+  background-color: #e40303;
+  font-weight: bold;
+}
+
+.difficulty article span {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  vertical-align: middle;
+  margin-left: 5px;
+}
+
+.difficulty .easy span {
+  background-image: url('../icons/serious.svg');
+}
+
+.difficulty .normal span {
+  background-image: url('../icons/happy.svg');
+}
+
+.difficulty .hard span {
+  background-image: url('../icons/bad.svg');
+}
+
+@media screen and (min-width: 768px) {
+  .difficulty {
+    border: 1px solid red;
+    right: -110px;
+  }
+
+
 }

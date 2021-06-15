@@ -24,12 +24,17 @@ header p {
   margin: 0 30px;
 }
 
+header .score span {
+  color: #1eff00;
+  font-weight: bold;
+}
+
 main {
   width: 100%;
   height: calc(100vh - 70px);
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .container {
@@ -37,6 +42,7 @@ main {
   max-width: 350px;
   height: 90vw;
   max-height: 350px;
+  margin-top: 20px;
 }
 
 .container .board {
@@ -142,7 +148,16 @@ main {
 }
 
 .container .level {
-  width: 100%;
-  margin-top: 25px;
+  border: 2px solid white;
+  background-color: rgba(225, 255, 255, .3);
+  width: 70%;
+  margin: 25px auto;
   text-align: center;
+  padding: 15px;
+  border-radius: 25px;
+}
+
+.container .level span {
+  color: #1eff00;
+  font-weight: bold;
 }

@@ -161,7 +161,9 @@ ipad.addListener(validation);
 
 function validation(e) {
     if (e.matches) 
-      card_difficulty.style.right === '-150px'
+      card_difficulty.style.right = '-150px'
+    else
+      card_difficulty.style.right = ''
 }
 validation(ipad);
 

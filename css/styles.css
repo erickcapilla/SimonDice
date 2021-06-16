@@ -224,6 +224,7 @@ main {
   border-radius: 10px;
   text-align: center;
   cursor: pointer;
+  font-weight: bold;
 }
 
 .difficulty .easy {
@@ -240,17 +241,14 @@ main {
 
 .difficulty .easy:hover {
   background-color: #66ff00;
-  font-weight: bold;
 }
 
 .difficulty .normal:hover {
   background-color: #d0ff00;
-  font-weight: bold;
 }
 
 .difficulty .hard:hover {
   background-color: #e40303;
-  font-weight: bold;
 }
 
 .difficulty article span {
@@ -290,7 +288,7 @@ main {
     background-color: #001028;
     position: absolute;
     top: 90px;
-    left: -50px;
+    left: -49px;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
   }

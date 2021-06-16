@@ -5,6 +5,7 @@ const level = document.getElementById('level')
 const btn_colors = document.querySelectorAll('#btn_colors')
 const answers_card = document.getElementById('answers-card')
 const answers = document.getElementById('answer')
+const level_card = document.querySelector('.level')
 
 const colorsBnt = []
 colorsBnt['blue'] = btn_colors[0]
@@ -25,6 +26,7 @@ let colorsClicked = []
 let levels = 1
 let scores = 0
 let lastLevel = 10
+let speed = 1
 
 btn_start.addEventListener('click', () => {
   if(!container.classList.contains('hide'))
@@ -35,7 +37,7 @@ btn_start.addEventListener('click', () => {
 })
 
 const start = () => {
-  if(levels <= 10) {
+  if(levels <= lastLevel) {
     level.innerHTML = levels
     game()
   } else {
@@ -74,7 +76,7 @@ const game = () => {
       setTimeout(() => {
         colorsSaved[i].classList.remove(`light-${colorsSaved[i].classList[0]}`)
       }, 500)
-    }, 1000 * (i + 1))
+    }, (1000 * (i + 1)) * speed)
   }
 
   colorsClicked = []
@@ -154,10 +156,20 @@ const card_difficulty = document.getElementById('difficulty')
 const arrow = document.getElementById('arrow')
 const btns_diffi = document.querySelectorAll('#btns-diffi')
 
+const ipad = window.matchMedia('screen and (max-width: 768px)');
+ipad.addListener(validation);
+
+function validation(e) {
+    if (e.matches) 
+      card_difficulty.style.right === '-150px'
+}
+validation(ipad);
+
+
 let difficult = 1
 btns_diffi[0].style.backgroundColor = '#66ff00'
-
-card_difficulty.style.right = '-150px'
+level_card.style.backgroundColor = '#66ff00a2'
+btns_diffi[0].style.color = 'black'
 
 btn_difficulty.addEventListener('click', e => {
   card_difficulty.style.transition = 'all 1.5s'
@@ -185,18 +197,30 @@ btns_diffi.forEach(btn => {
 })
 
 const bgDifficulty = () => {
+  btns_diffi.forEach(btn => btn.style.backgroundColor = '')
+  btns_diffi.forEach(btn => btn.style.color = '')
+
   switch (difficult) {
     case 1:
-      btns_diffi.forEach(btn => btn.style.backgroundColor = '')
       btns_diffi[0].style.backgroundColor = '#66ff00'
+      btns_diffi[0].style.color = 'black'
+      level_card.style.backgroundColor = '#66ff00a2'
+      lastLevel = 10
+      speed = 1
       break;
     case 2:
-      btns_diffi.forEach(btn => btn.style.backgroundColor = '')
       btns_diffi[1].style.backgroundColor = '#d0ff00'
+      btns_diffi[1].style.color = 'black'
+      level_card.style.backgroundColor = '#d0ff00a9'
+      lastLevel = 15
+      speed = .8
       break;
     case 3:
-      btns_diffi.forEach(btn => btn.style.backgroundColor = '')
       btns_diffi[2].style.backgroundColor = '#e40303'
+      btns_diffi[2].style.color = 'black'
+      level_card.style.backgroundColor = '#e40303a9'
+      lastLevel = 20
+      speed = .5
       break;
   }
 }

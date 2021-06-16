@@ -24,6 +24,7 @@ let trueOrFalse = []
 let colorsClicked = []
 let levels = 1
 let scores = 0
+let lastLevel = 10
 
 btn_start.addEventListener('click', () => {
   if(!container.classList.contains('hide'))
@@ -146,4 +147,56 @@ const answersFunc = () => {
     answers.innerHTML += `<div class="answer-color ${color.classList[0]}"></div>`
   })
   answers_card.classList.remove('hide')
+}
+
+const btn_difficulty = document.getElementById('btn-difficulty')
+const card_difficulty = document.getElementById('difficulty')
+const arrow = document.getElementById('arrow')
+const btns_diffi = document.querySelectorAll('#btns-diffi')
+
+let difficult = 1
+btns_diffi[0].style.backgroundColor = '#66ff00'
+
+card_difficulty.style.right = '-150px'
+
+btn_difficulty.addEventListener('click', e => {
+  card_difficulty.style.transition = 'all 1.5s'
+  arrow.style.transition = 'all 1.5s'
+  if (card_difficulty.style.right === '-150px') {
+    card_difficulty.style.right = '0'
+    arrow.style.transform = 'translate(8px, 8px) rotateZ(360deg)'
+  } else {
+    card_difficulty.style.right = '-150px'
+    arrow.style.transform = 'translate(8px, 8px) rotateZ(180deg)'
+  }
+})
+
+btns_diffi.forEach(btn => {
+  btn.addEventListener('click', () => {
+    if (btn.classList.contains('easy')) {
+      difficult = 1
+    } else if (btn.classList.contains('normal')) {
+      difficult = 2
+    } else if (btn.classList.contains('hard')) {
+      difficult = 3
+    }
+    bgDifficulty()
+  })
+})
+
+const bgDifficulty = () => {
+  switch (difficult) {
+    case 1:
+      btns_diffi.forEach(btn => btn.style.backgroundColor = '')
+      btns_diffi[0].style.backgroundColor = '#66ff00'
+      break;
+    case 2:
+      btns_diffi.forEach(btn => btn.style.backgroundColor = '')
+      btns_diffi[1].style.backgroundColor = '#d0ff00'
+      break;
+    case 3:
+      btns_diffi.forEach(btn => btn.style.backgroundColor = '')
+      btns_diffi[2].style.backgroundColor = '#e40303'
+      break;
+  }
 }

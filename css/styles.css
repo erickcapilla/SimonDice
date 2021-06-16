@@ -17,6 +17,8 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
+  z-index: 10;
 }
 
 header h2,
@@ -204,7 +206,7 @@ main {
 
 .difficulty {
   width: 120px;
-  height: 100%;
+  height: 100vh;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -213,6 +215,7 @@ main {
   top: 0;
   right: 15px;
   padding-top: 70px;
+  z-index: 10;
 }
 
 .difficulty article {
@@ -273,11 +276,33 @@ main {
   background-image: url('../icons/bad.svg');
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (max-width: 768px) {
   .difficulty {
-    border: 1px solid red;
-    right: -110px;
+    width: 150px;
+    background-color: #001028;
+    padding: 0 15px;
+    right: -150px;
   }
 
+  .difficulty-btn {
+    height: 50px;
+    width: 50px;
+    background-color: #001028;
+    position: absolute;
+    top: 90px;
+    left: -50px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+  }
 
+  .difficulty-btn span {
+    display: block;
+    width: 35px;
+    height: 35px;
+    background-image: url('../icons/arrow.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    transform: translate(8px, 8px) rotateZ(180deg);
+  }
 }
